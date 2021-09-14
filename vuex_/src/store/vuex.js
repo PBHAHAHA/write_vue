@@ -6,6 +6,29 @@ const forEach = (obj,callback)=> {
     })
 }
 
+class ModuleCollection{
+    constructor(options){
+        this.register([],options);
+    }
+    register(path, rootModule){
+        let newModule = {
+            _raw: rootModule,
+            _children: {},
+            state: rootModule.state
+        }
+        if(path.length === 0){
+            this.root = newModule
+        }else{
+            this.root._children[path[path.length-1]] = newModule
+        }
+        if(rootModule.modules) {
+            forEach(rootModule.modules,(moduleName,module)=>{
+                this.register(path.concat(moduleName), module)
+            })
+        }
+    }
+}
+
 class Store {
     constructor(options){
         this._s = new Vue({
@@ -39,6 +62,27 @@ class Store {
                 value(this,payload)
             }
         })
+
+
+        // 先格式化用户的传的数据
+        this.modules = new ModuleCollection(options);
+        console.log(this.modules);
+
+        // let root = {
+        //     _raw: rootModule,
+        //     _children: {
+        //         a: {
+        //             _raw:aModule,
+        //             _children: {}
+        //         },
+        //         b: {
+        //             _raw: bModule,
+        //             _children
+        //         }
+        //     }
+        // }
+        
+
 
     }
     commit = (type, payload)=>{

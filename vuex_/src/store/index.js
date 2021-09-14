@@ -4,6 +4,8 @@ import Vuex from './vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  
+
   state: {
     age: 10
   },
@@ -25,6 +27,22 @@ export default new Vuex.Store({
       commit('syncRemove',payload)
     },
   },
+  // 把项目分成很多的模块
   modules: {
+    a: {
+      state: {
+        x: 1
+      },
+      modules: {
+        c: {
+          state:{z:3}
+        }
+      }
+    },
+    b: {
+      state: {
+        y: 1
+      }
+    }
   }
 })
