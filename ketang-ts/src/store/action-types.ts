@@ -1,0 +1,1 @@
+export const SET_MONITOR_TYPE = "SET_MONITOR_TYPE"

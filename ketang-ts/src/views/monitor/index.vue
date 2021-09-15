@@ -1,6 +1,6 @@
 <template>
   <div class="monitor">
-    <!-- <MonitorTab></MonitorTab> -->
+    <MonitorTab :monitorType="monitorType" @setMonitorType="setMonitorType"></MonitorTab>
     <div class="monitor-content">
       {{ca}}
     </div>
@@ -10,21 +10,36 @@
 import {computed, defineComponent} from 'vue'
 import MonitorTab from './monitor-tab.vue'
 import MonitorItem from './monitor-item.vue'
-import { useStore } from 'vuex'
+import { Store, useStore } from 'vuex'
 import { IGlobalState } from '@/store'
+import { MONITOR_TYPES } from '@/typings'
+import * as Types from '@/store/action-types'
+
+function useMonitorType(store:Store<IGlobalState>){
+  let monitorType = computed(()=>{
+    return store.state.monitor.currentMonitorType
+  })
+  function setMonitorType(type:MONITOR_TYPES){
+    store.commit(`monitor/${Types.SET_MONITOR_TYPE}`,type)
+  }
+  return {
+    monitorType,
+    setMonitorType
+  }
+}
 export default defineComponent({
     components: {
       MonitorTab,MonitorItem
     },
     setup(props,context){
+      // 1.获取vuex中的状态，更改状态.
       let store = useStore<IGlobalState>()
-      let ca = computed(()=>{
-        return store.state.monitor.currentMonitorType
-      })
-      console.log("是水水水水",store.state.monitor);
-      
+      let ca = computed(()=> store.state.monitor.currentMonitorType) 
+      let {monitorType, setMonitorType} = useMonitorType(store)
       return {
-        ca
+        monitorType,
+        ca,
+        setMonitorType
       }
     }
 })

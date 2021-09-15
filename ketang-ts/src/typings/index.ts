@@ -4,6 +4,7 @@ export enum MONITOR_TYPES {
     SINGLE_UP_DOWN,//单涨停回撤
     HOT_WAVE,//热门波形
     HOT_LITTLE_WAVE,//热门小波形
+    HOT_DOWN,
 }
 
 // 监控页存哪些数据

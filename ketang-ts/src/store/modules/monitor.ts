@@ -1,6 +1,7 @@
 import { MONITOR_TYPES,IMonitorState } from "@/typings/index"
 import { Module } from "vuex"
 import { IGlobalState } from ".."
+import * as Types from '../action-types'
 
 
 
@@ -15,15 +16,15 @@ const state:IMonitorState = {
         list: [],//当前已经显示到页面的有哪些
     }
 }
-
+const mutations = {
+    [Types.SET_MONITOR_TYPE](state:IMonitorState,payload:MONITOR_TYPES){
+        state.currentMonitorType = payload
+    }
+}
 const monitor:Module<IMonitorState,IGlobalState> = {
     namespaced: true,
     state,
-    mutations: {
-        aa(a:IMonitorState){
-            console.log(a)
-        }
-    }
+    mutations,
 }
 
 export default monitor
