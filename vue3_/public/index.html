@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- <script src="../node_modules/@vue/reactivity/dist/reactivity.global.js"></script> -->
+    <script src="../dist/vue.js"></script>
+
+    <script>
+            const {reactive, effect,ref,computed} = VueReactivity;
+            console.log(reactive, effect,ref,computed)
+            const state = reactive({
+                name: "pb",
+                age: 18,
+                address: '四川成都'
+            })
+            console.log(state)
+            // effect(()=> {
+            //     console.log("xixi")
+            //     app.innerHTML = state.name+"今年"+state.age
+            // })
+            // 当effect 函数中依赖的数据发生变化 effect会重新执行
+            // setTimeout(()=>{
+            //     state.name = '中国'
+            // },1500)
+            
+    </script>
+</body>
+</html>
