@@ -17,9 +17,11 @@
             const state = reactive({
                 name: "pb",
                 age: 18,
-                address: '四川成都'
+                address: '四川成都',
+                a: {b: 1}
             })
-            console.log(state)
+            state.address = 'guangyuan'
+            // console.log(state.a.b)
             // effect(()=> {
             //     console.log("xixi")
             //     app.innerHTML = state.name+"今年"+state.age
